@@ -107,7 +107,7 @@ ENV_NAME=template_value
 ## Project Structure
 
 ```
-Template-Tkinter-Python/
+Template-Tkinter-Program/
 ├── src/
 │   ├── configs/
 │   │   ├── __init__.py
