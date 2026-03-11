@@ -142,6 +142,8 @@ Template-Tkinter-Program/
 │   │       ├── register_view.py
 │   │       └── main_view.py
 │   ├── utils/
+│   │   ├── dialogs.py
+│   │   ├── error_handler.py
 │   │   └── __init__.py
 │   ├── assets/
 │   │   └── images/
@@ -317,12 +319,12 @@ class UserDAO:
 ```python
 class AuthService:
     @staticmethod
-    def login(username: str, password: str) -> tuple[UserModel | None, str]:
+    def login(username: str, password: str) -> UserModel | None:
         # Business rules: validate fields, check user exists, verify password
         ...
 
     @staticmethod
-    def register(username: str, password: str, confirm_password: str) -> tuple[bool, str]:
+    def register(username: str, password: str, confirm_password: str) -> bool:
         # Business rules: validate fields, check duplicates, hash password
         ...
 ```

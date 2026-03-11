@@ -7,6 +7,7 @@ from src.ui.styles import Styles
 from src.ui.views.login_view import LoginView
 from src.ui.views.main_view import MainView
 from src.ui.views.register_view import RegisterView
+from src.utils.error_handler import handle_exceptions
 
 
 class InterfaceApp:
@@ -33,18 +34,19 @@ class InterfaceApp:
     def username(self) -> str:
         return self.user.username if self.user else "N/A"
 
+    @handle_exceptions
     def _login(self) -> None:
         username = self._login_view.text_username.get()
         password = self._login_view.text_password.get()
-        user, msg = AuthService.login(username=username, password=password)
+        user = AuthService.login(username=username, password=password)
 
         if not user:
-            self._login_view.text_confirm.set(msg)
             return
 
         self.user = user
         MainView(root=self._root, styles=self._styles, username=self.username)
 
+    @handle_exceptions
     def _open_register(self) -> None:
         self._register_view = RegisterView(
             root=self._root,
@@ -52,12 +54,13 @@ class InterfaceApp:
             on_register=self._register,
         )
 
+    @handle_exceptions
     def _register(self) -> None:
-        ok, msg = AuthService.register(
+        ok = AuthService.register(
             username=self._register_view.text_username.get(),
             password=self._register_view.text_password.get(),
             confirm_password=self._register_view.text_confirm_password.get(),
         )
-        self._register_view.text_confirm.set(msg)
+
         if ok:
             self._register_view.destroy()
