@@ -1,11 +1,12 @@
-from tkinter import Button, Label, StringVar, Toplevel
+from collections.abc import Callable
+from tkinter import Button, Label, StringVar, Tk, Toplevel
 
 from src.ui.components.labeled_entry import LabeledEntry
 from src.ui.styles import Styles
 
 
 class RegisterView(Toplevel):
-    def __init__(self, root, styles: Styles, on_register: callable) -> None:
+    def __init__(self, root: Tk, styles: Styles, on_register: Callable) -> None:
         super().__init__(root)
         self._styles = styles
         self._on_register = on_register

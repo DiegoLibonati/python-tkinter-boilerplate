@@ -333,13 +333,17 @@ class UserDAO:
 
 ```python
 class AuthService:
-    @staticmethod
-    def login(username: str, password: str) -> UserModel:
+    # The DAO is injected here because UserDAO uses an in-memory dictionary as the data store.
+    # If using a real database, the DAO would be imported and used directly inside each method
+    # without needing to initialize it in the constructor.
+    def __init__(self, dao: UserDAO) -> None:
+        self._dao = dao
+
+    def login(self, username: str, password: str) -> UserModel:
         # Business rules: validate fields, check user exists, verify password
         ...
 
-    @staticmethod
-    def register(username: str, password: str, confirm_password: str) -> bool:
+    def register(self, username: str, password: str, confirm_password: str) -> bool:
         # Business rules: validate fields, check duplicates, hash password
         ...
 ```

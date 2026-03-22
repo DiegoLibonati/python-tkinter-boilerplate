@@ -19,6 +19,7 @@ def interface_app(mock_root: MagicMock, mock_styles: MagicMock) -> InterfaceApp:
         instance._styles = mock_styles
         instance._root = mock_root
         instance._config = MagicMock()
+        instance._auth_service = MagicMock()
         instance._login_view = mock_login_view
         return instance
 
@@ -85,11 +86,9 @@ class TestInterfaceAppLogin:
     def test_user_is_set_on_successful_login(self, interface_app: InterfaceApp, sample_user: UserModel) -> None:
         interface_app._login_view.text_username.get.return_value = "testuser"
         interface_app._login_view.text_password.get.return_value = "testpass"
+        interface_app._auth_service.login.return_value = sample_user
 
-        with (
-            patch("src.ui.interface_app.AuthService.login", return_value=sample_user),
-            patch("src.ui.interface_app.MainView"),
-        ):
+        with patch("src.ui.interface_app.MainView"):
             interface_app._login()
 
         assert interface_app.user is sample_user
@@ -97,11 +96,9 @@ class TestInterfaceAppLogin:
     def test_main_view_created_on_successful_login(self, interface_app: InterfaceApp, sample_user: UserModel) -> None:
         interface_app._login_view.text_username.get.return_value = "testuser"
         interface_app._login_view.text_password.get.return_value = "testpass"
+        interface_app._auth_service.login.return_value = sample_user
 
-        with (
-            patch("src.ui.interface_app.AuthService.login", return_value=sample_user),
-            patch("src.ui.interface_app.MainView") as mock_main_view,
-        ):
+        with patch("src.ui.interface_app.MainView") as mock_main_view:
             interface_app._login()
 
         mock_main_view.assert_called_once()
@@ -109,11 +106,9 @@ class TestInterfaceAppLogin:
     def test_main_view_receives_username(self, interface_app: InterfaceApp, sample_user: UserModel) -> None:
         interface_app._login_view.text_username.get.return_value = "testuser"
         interface_app._login_view.text_password.get.return_value = "testpass"
+        interface_app._auth_service.login.return_value = sample_user
 
-        with (
-            patch("src.ui.interface_app.AuthService.login", return_value=sample_user),
-            patch("src.ui.interface_app.MainView") as mock_main_view,
-        ):
+        with patch("src.ui.interface_app.MainView") as mock_main_view:
             interface_app._login()
 
         _, kwargs = mock_main_view.call_args
@@ -122,24 +117,20 @@ class TestInterfaceAppLogin:
     def test_raises_when_auth_service_raises(self, interface_app: InterfaceApp) -> None:
         interface_app._login_view.text_username.get.return_value = ""
         interface_app._login_view.text_password.get.return_value = ""
+        interface_app._auth_service.login.side_effect = ValidationDialogError(message="err")
 
-        with (
-            patch("src.ui.interface_app.AuthService.login", side_effect=ValidationDialogError(message="err")),
-            pytest.raises(ValidationDialogError),
-        ):
+        with pytest.raises(ValidationDialogError):
             interface_app._login()
 
     def test_auth_service_called_with_credentials(self, interface_app: InterfaceApp, sample_user: UserModel) -> None:
         interface_app._login_view.text_username.get.return_value = "testuser"
         interface_app._login_view.text_password.get.return_value = "testpass"
+        interface_app._auth_service.login.return_value = sample_user
 
-        with (
-            patch("src.ui.interface_app.AuthService.login", return_value=sample_user) as mock_login,
-            patch("src.ui.interface_app.MainView"),
-        ):
+        with patch("src.ui.interface_app.MainView"):
             interface_app._login()
 
-        mock_login.assert_called_once_with(username="testuser", password="testpass")
+        interface_app._auth_service.login.assert_called_once_with(username="testuser", password="testpass")
 
 
 class TestInterfaceAppOpenRegister:
@@ -171,9 +162,9 @@ class TestInterfaceAppRegister:
         mock_register_view.text_username.get.return_value = "newuser"
         mock_register_view.text_password.get.return_value = "pass123"
         mock_register_view.text_confirm_password.get.return_value = "pass123"
+        interface_app._auth_service.register.return_value = True
 
-        with patch("src.ui.interface_app.AuthService.register", return_value=True):
-            interface_app._register()
+        interface_app._register()
 
         mock_register_view.destroy.assert_called_once()
 
@@ -183,9 +174,9 @@ class TestInterfaceAppRegister:
         mock_register_view.text_username.get.return_value = "newuser"
         mock_register_view.text_password.get.return_value = "pass123"
         mock_register_view.text_confirm_password.get.return_value = "pass123"
+        interface_app._auth_service.register.return_value = False
 
-        with patch("src.ui.interface_app.AuthService.register", return_value=False):
-            interface_app._register()
+        interface_app._register()
 
         mock_register_view.destroy.assert_not_called()
 
@@ -195,11 +186,11 @@ class TestInterfaceAppRegister:
         mock_register_view.text_username.get.return_value = "newuser"
         mock_register_view.text_password.get.return_value = "pass123"
         mock_register_view.text_confirm_password.get.return_value = "pass123"
+        interface_app._auth_service.register.return_value = True
 
-        with patch("src.ui.interface_app.AuthService.register", return_value=True) as mock_register:
-            interface_app._register()
+        interface_app._register()
 
-        mock_register.assert_called_once_with(
+        interface_app._auth_service.register.assert_called_once_with(
             username="newuser",
             password="pass123",
             confirm_password="pass123",
@@ -211,9 +202,7 @@ class TestInterfaceAppRegister:
         mock_register_view.text_username.get.return_value = ""
         mock_register_view.text_password.get.return_value = ""
         mock_register_view.text_confirm_password.get.return_value = ""
+        interface_app._auth_service.register.side_effect = ValidationDialogError(message="err")
 
-        with (
-            patch("src.ui.interface_app.AuthService.register", side_effect=ValidationDialogError(message="err")),
-            pytest.raises(ValidationDialogError),
-        ):
+        with pytest.raises(ValidationDialogError):
             interface_app._register()

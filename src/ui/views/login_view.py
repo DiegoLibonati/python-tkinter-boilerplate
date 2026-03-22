@@ -1,3 +1,4 @@
+from collections.abc import Callable
 from tkinter import Button, Frame, Label, StringVar, Tk
 
 from src.ui.components.labeled_entry import LabeledEntry
@@ -5,7 +6,7 @@ from src.ui.styles import Styles
 
 
 class LoginView(Frame):
-    def __init__(self, root: Tk, styles: Styles, on_login: callable, on_register: callable) -> None:
+    def __init__(self, root: Tk, styles: Styles, on_login: Callable, on_register: Callable) -> None:
         super().__init__(root, bg=styles.PRIMARY_COLOR)
         self._styles = styles
         self._on_login = on_login

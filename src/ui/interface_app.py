@@ -1,6 +1,7 @@
 from tkinter import Tk
 
 from src.configs.default_config import DefaultConfig
+from src.data_access.user_dao import UserDAO
 from src.models.user_model import UserModel
 from src.services.auth_service import AuthService
 from src.ui.styles import Styles
@@ -17,6 +18,7 @@ class InterfaceApp:
         self._styles = styles
         self._config = config
         self._root = root
+        self._auth_service = AuthService(dao=UserDAO())
         self._root.title("Template Tkinter")
         self._root.geometry("400x400")
         self._root.resizable(False, False)
@@ -39,7 +41,7 @@ class InterfaceApp:
         username = self._login_view.text_username.get()
         password = self._login_view.text_password.get()
 
-        user = AuthService.login(username=username, password=password)
+        user = self._auth_service.login(username=username, password=password)
         self.user = user
 
         MainView(root=self._root, styles=self._styles, username=self.username)
@@ -54,7 +56,7 @@ class InterfaceApp:
 
     @exceptions_handler
     def _register(self) -> None:
-        ok = AuthService.register(
+        ok = self._auth_service.register(
             username=self._register_view.text_username.get(),
             password=self._register_view.text_password.get(),
             confirm_password=self._register_view.text_confirm_password.get(),
