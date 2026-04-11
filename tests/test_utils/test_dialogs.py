@@ -1,3 +1,4 @@
+from typing import Any
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -43,14 +44,14 @@ class TestBaseDialog:
 
     def test_to_dict_contains_required_keys(self) -> None:
         dialog: BaseDialog = BaseDialog()
-        result: dict = dialog.to_dict()
+        result: dict[str, Any] = dialog.to_dict()
         assert "dialog_type" in result
         assert "title" in result
         assert "message" in result
 
     def test_to_dict_values_match_instance(self) -> None:
         dialog: BaseDialog = BaseDialog(message="test msg")
-        result: dict = dialog.to_dict()
+        result: dict[str, Any] = dialog.to_dict()
         assert result["dialog_type"] == BaseDialog.ERROR
         assert result["message"] == "test msg"
         assert result["title"] == "Error"
