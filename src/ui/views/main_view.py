@@ -8,7 +8,7 @@ class MainView(Toplevel):
         super().__init__(root)
         self._styles = styles
 
-        self.title("TkinterBoilerplate Main")
+        self.title("PythonTkinterBoilerplate Main")
         self.geometry("200x200")
         self.resizable(False, False)
         self.config(bg=self._styles.PRIMARY_COLOR)

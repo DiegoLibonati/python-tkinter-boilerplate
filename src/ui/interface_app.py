@@ -19,7 +19,7 @@ class InterfaceApp:
         self._config = config
         self._root = root
         self._auth_service = AuthService(dao=UserDAO())
-        self._root.title("TkinterBoilerplate")
+        self._root.title("PythonTkinterBoilerplate")
         self._root.geometry("400x400")
         self._root.resizable(False, False)
         self._root.config(background=self._styles.PRIMARY_COLOR)

@@ -9,4 +9,4 @@ class DefaultConfig:
         self.TESTING = False
 
         # App
-        self.ENV_NAME = os.getenv("ENV_NAME", "tkinter boilerplate")
+        self.ENV_NAME = os.getenv("ENV_NAME", "python tkinter boilerplate")

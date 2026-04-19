@@ -12,7 +12,7 @@ class TestMainView:
 
     def test_title_is_set_correctly(self, root: tk.Tk, styles: Styles) -> None:
         view: MainView = MainView(root=root, styles=styles, username="alice")
-        assert view.title() == "TkinterBoilerplate Main"
+        assert view.title() == "PythonTkinterBoilerplate Main"
         view.destroy()
 
     def test_is_not_resizable(self, root: tk.Tk, styles: Styles) -> None:

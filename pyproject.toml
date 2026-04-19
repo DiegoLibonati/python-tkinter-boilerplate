@@ -1,7 +1,7 @@
 [project]
-name = "tkinter-boilerplate"
+name = "python-tkinter-boilerplate"
 version = "1.0.0"
-description = "TkinterBoilerplate is a starting point for building desktop applications with a graphical interface using Python and Tkinter."
+description = "PythonTkinterBoilerplate is a starting point for building desktop applications with a graphical interface using Python and Tkinter."
 requires-python = ">=3.11"
 
 [tool.pytest.ini_options]

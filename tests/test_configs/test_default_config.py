@@ -25,7 +25,7 @@ class TestDefaultConfig:
     def test_env_name_default_value(self, monkeypatch: pytest.MonkeyPatch) -> None:
         monkeypatch.delenv("ENV_NAME", raising=False)
         config: DefaultConfig = DefaultConfig()
-        assert config.ENV_NAME == "tkinter boilerplate"
+        assert config.ENV_NAME == "python tkinter boilerplate"
 
     def test_env_name_reads_from_env(self, monkeypatch: pytest.MonkeyPatch) -> None:
         monkeypatch.setenv("ENV_NAME", "my_app")

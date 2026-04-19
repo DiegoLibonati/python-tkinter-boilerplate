@@ -1,4 +1,4 @@
-# TkinterBoilerplate
+# PythonTkinterBoilerplate
 
 ## Educational Purpose
 
@@ -26,11 +26,12 @@ NOTE: Install **pre-commit** inside the repository folder.
 
 ## Description
 
-**TkinterBoilerplate** is a starting point for building desktop applications with a graphical interface using Python and Tkinter.
+**PythonTkinterBoilerplate** is a starting point for building desktop applications with a graphical interface using Python and Tkinter.
 
 **The problem it solves**: avoid repeating the same setup and architecture decisions every time a new desktop project is started. Instead of configuring linting, testing, logging, and project structure from scratch each time, this template has all of that already in place.
 
 **What it includes**:
+
 - Ruff for linting and formatting
 - pre-commit hooks for enforcing code quality before every commit
 - Pydantic v2 for data validation and modeling
@@ -48,12 +49,14 @@ NOTE: Install **pre-commit** inside the repository folder.
 ## Libraries used
 
 #### Requirements.txt
+
 ```
 pydantic==2.11.9
 python-dotenv==1.0.1
 ```
 
 #### Requirements.dev.txt
+
 ```
 pre-commit==4.3.0
 pip-audit==2.7.3
@@ -61,6 +64,7 @@ ruff==0.11.12
 ```
 
 #### Requirements.test.txt
+
 ```
 pytest==8.4.2
 pytest-env==1.1.5
@@ -70,13 +74,14 @@ pytest-xdist==3.5.0
 ```
 
 #### Requirements.build.txt
+
 ```
 pyinstaller==6.16.0
 ```
 
 ## Portfolio Link
 
-[`https://www.diegolibonati.com.ar/#/project/tkinter-boilerplate`](https://www.diegolibonati.com.ar/#/project/tkinter-boilerplate)
+[`https://www.diegolibonati.com.ar/#/project/python-tkinter-boilerplate`](https://www.diegolibonati.com.ar/#/project/python-tkinter-boilerplate)
 
 ## Testing
 
@@ -132,7 +137,7 @@ ENV_NAME=template_value
 ## Project Structure
 
 ```
-tkinter-boilerplate/
+python-tkinter-boilerplate/
 ├── src/
 │   ├── configs/
 │   │   ├── __init__.py
@@ -379,7 +384,7 @@ class DefaultConfig:
         self.TESTING = False
 
         # App
-        self.ENV_NAME = os.getenv("ENV_NAME", "tkinter boilerplate")
+        self.ENV_NAME = os.getenv("ENV_NAME", "python tkinter boilerplate")
 
 # development_config.py - Customizes for development
 class DevelopmentConfig(DefaultConfig):
