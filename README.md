@@ -1,4 +1,4 @@
-# PythonTkinterBoilerplate
+# Python Tkinter Boilerplate
 
 ## Educational Purpose
 
@@ -26,7 +26,7 @@ NOTE: Install **pre-commit** inside the repository folder.
 
 ## Description
 
-**PythonTkinterBoilerplate** is a starting point for building desktop applications with a graphical interface using Python and Tkinter.
+**Python Tkinter Boilerplate** is a starting point for building desktop applications with a graphical interface using Python and Tkinter.
 
 **The problem it solves**: avoid repeating the same setup and architecture decisions every time a new desktop project is started. Instead of configuring linting, testing, logging, and project structure from scratch each time, this template has all of that already in place.
 
