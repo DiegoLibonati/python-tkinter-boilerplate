@@ -1,0 +1,62 @@
+[project]
+name = "python-tkinter-boilerplate"
+version = "1.0.0"
+description = "Python Tkinter Boilerplate is a starting point for building desktop applications with a graphical interface using Python and Tkinter."
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic==2.11.9",
+    "python-dotenv==1.2.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit==4.3.0",
+    "pip-audit==2.7.3",
+    "ruff==0.11.12",
+]
+test = [
+    "pytest==9.0.3",
+    "pytest-env==1.1.5",
+    "pytest-cov==4.1.0",
+    "pytest-timeout==2.3.1",
+    "pytest-xdist==3.5.0",
+]
+build = [
+    "pyinstaller==6.16.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = "."
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+log_cli = true
+log_cli_level = "WARNING"
+addopts = "-v --tb=short"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+    "ignore::pytest.PytestCollectionWarning",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
+env = [
+    "TEST_ENV_NAME=template_value",
+    "ENV_NAME=template_value"
+]
+
+[tool.ruff]
+line-length = 100
+exclude = [".git", "__pycache__", "env", "venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP"]
+ignore = ["E203"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
