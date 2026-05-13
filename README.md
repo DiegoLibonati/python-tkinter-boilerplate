@@ -461,16 +461,15 @@ Alternatively, you can run the helper script: `./build.sh`
 
 Before distributing the application, prepare the production environment and run through the following checklist.
 
-1. Create a **separate** `.env.prod` file from the production template: `cp .env.example.prod .env.prod`
-2. Set `ENVIRONMENT=production` and all required env keys with real production values in `.env.prod` (see [Env Keys](#env-keys))
-3. Add `.env.prod` to `.gitignore` — **never commit production secrets to version control**
-4. Run the [Security Audit](#security-audit) to check for known vulnerabilities in your dependencies
-5. Run the [Testing](#testing) suite to verify everything works
-6. Generate the standalone executable following the [Build](#build) steps
+1. Set `ENVIRONMENT=production` and all required env keys with real production values in `.env` (see [Env Keys](#env-keys))
+2. Verify `.env` is listed in `.gitignore` — **never commit production secrets to version control**
+3. Run the [Security Audit](#security-audit) to check for known vulnerabilities in your dependencies
+4. Run the [Testing](#testing) suite to verify everything works
+5. Generate the standalone executable following the [Build](#build) steps
 
-The output executable in `dist/` bundles `.env.prod` and assets — it runs on any machine without requiring Python to be installed.
+The output executable in `dist/` bundles `.env` and assets — it runs on any machine without requiring Python to be installed.
 
-> **Warning:** `app.spec` bundles `.env.prod` (not the repo-level `.env`) into the executable. The repo-level `.env` is for local development only and must never contain real production secrets.
+> **Warning:** `app.spec` bundles `.env` into the executable. Make sure `.env` contains only the values needed for the target environment before building.
 
 ## Known Issues
 
