@@ -1,8 +1,8 @@
-from typing import Annotated
-
-from pydantic import BaseModel, StringConstraints
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class UserModel(BaseModel):
-    username: Annotated[str, StringConstraints(min_length=1, strip_whitespace=True)]
-    password: Annotated[str, StringConstraints(min_length=1, strip_whitespace=True)]
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+
+    username: str = Field(..., min_length=1)
+    password: str = Field(..., min_length=1)
