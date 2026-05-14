@@ -180,6 +180,7 @@ python-tkinter-boilerplate/
 ├── .env.example.prod
 ├── .gitignore
 ├── .pre-commit-config.yaml
+├── .python-version
 ├── LICENSE
 └── README.md
 ```
@@ -206,6 +207,7 @@ python-tkinter-boilerplate/
 20. `requirements.test.txt` -> Thin wrapper: installs test extras (`-e .[test]`).
 21. `requirements.build.txt` -> Thin wrapper: installs build extras (`-e .[build]`).
 22. `app.spec` -> **PyInstaller configuration** for generating standalone executables.
+23. `.python-version` -> Pins the Python version (`3.11`) for tools like **pyenv**. If you use pyenv, it will automatically switch to the correct version when entering the project directory.
 
 ## Architecture & Design Patterns
 
