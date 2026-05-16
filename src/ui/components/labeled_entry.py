@@ -26,16 +26,13 @@ class LabeledEntry(Frame):
             fg=self._styles.WHITE_COLOR,
         ).grid(row=0, column=0, padx=(20, 5), sticky="e")
 
-        entry_config = {
-            "width": 20,
-            "font": self._styles.FONT_ROBOTO_15,
-            "bg": self._styles.SECONDARY_COLOR,
-            "border": 0,
-            "fg": self._styles.WHITE_COLOR,
-            "textvariable": variable,
-        }
-
-        if show:
-            entry_config["show"] = show
-
-        Entry(self, **entry_config).grid(row=0, column=1, padx=(5, 20), sticky="w")
+        Entry(
+            self,
+            width=20,
+            font=self._styles.FONT_ROBOTO_15,
+            bg=self._styles.SECONDARY_COLOR,
+            border=0,
+            fg=self._styles.WHITE_COLOR,
+            textvariable=variable,
+            show=show,
+        ).grid(row=0, column=1, padx=(5, 20), sticky="w")
