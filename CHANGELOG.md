@@ -8,3 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Entries below this header are appended automatically by the CI release workflow
 on every push to `main`. See the [Releases page](../../releases) for downloadable
 binaries.
+## [v1.0.1] - 2026-05-16
+
+### Bug fixes
+
+- fix(ci): annotated tags, bootstrap from pyproject and add [skip release] guard (7a3a81b)
+
+### Build & CI
+
+- ci: trigger first release (913630f)
+
