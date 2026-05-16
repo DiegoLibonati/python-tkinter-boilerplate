@@ -520,6 +520,16 @@ Commits merged into `main` must follow [Conventional Commits](https://www.conven
 
 When a push contains multiple commits, the highest applicable bump wins (a single `feat:` among many `fix:` triggers a MINOR bump). If you squash-merge PRs, configure the repo to use the PR title as the squash commit message and write the **PR title** following the convention.
 
+### Skipping a release
+
+If you need to push a change to `main` without producing a release (e.g. tweaking job names in the workflow, fixing a typo in the README), append `[skip release]` to the commit message. The validation jobs (lint, test, build) still run; only `prepare-release`, `build-windows-exe` and `publish-release` are skipped.
+
+```bash
+git commit -m "ci: rename build job for clarity [skip release]"
+```
+
+To skip **everything** including validation, use GitHub's standard `[skip ci]` marker instead.
+
 ### Where the build outputs live
 
 | Output | Location |
